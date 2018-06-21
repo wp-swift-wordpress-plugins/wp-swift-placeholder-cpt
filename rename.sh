@@ -229,17 +229,42 @@ then
 	sed -i "s/WP Taoglas/${company}/g" ${text_domain}-${cpt}.php
 
 	# cp ~/bash-scripts/wp-plugin-cpt/admin-menu.php admin-menu.php
-sed -i "s/placeholder/${cpt}/g" admin-menu.php
-# Rename class name
-sed -i "s/PlaceholderPluginTools/${singular_label}PluginTools/g" admin-menu.php
-# Rename instance name
-sed -i "s/plugin_tools/${cpt}_plugin_tools/g" admin-menu.php
+	sed -i "s/placeholder/${cpt}/g" admin-menu.php
+	# Rename class name
+	sed -i "s/PlaceholderPluginTools/${singular_label}PluginTools/g" admin-menu.php
+	# Rename instance name
+	sed -i "s/plugin_tools/${cpt}_plugin_tools/g" admin-menu.php
 
-	exit
+	cd assets
+		mkdir css
+		mkdir images
+		cd ../
+	cd functions
+		sed -i "s/placeholder/${cpt}/g" enqueue-scripts.php
+		sed -i "s/PLACEHOLDER/${CPT}/g" enqueue-scripts.php
+		sed -i "s/wp_taoglas/${prefix}/g" enqueue-scripts.php
+		sed -i "s/wp-text-domain/${text_domain}/g" enqueue-scripts.php
+		# touch html.php
+		# touch shortcodes.php 
+		sed -i "s/placeholder/${cpt}/g" html.php
+		sed -i "s/wp_prefix/${prefix}/g" html.php
+		cd ../
+	cd html
+		# touch ${cpt}-loop.php
+		# html/placeholder-loop.php
+		mv placeholder-loop.php ${cpt}-loop.php
+		sed -i "s/placeholder/${cpt}/g" ${cpt}-loop.php
+		# touch the-content-single.php
+		cd ../
+
+
+	# exit
 	rm -rf .git
 	git init
 	git add .
 	git status
+	tree
+	exit
 else
     echo "Aborted"
     exit
