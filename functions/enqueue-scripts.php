@@ -17,6 +17,7 @@ function wp_prefix_placeholder_enqueue_styles() {
 		);		
 	}
 }
+
 /**
  * Register the script for the public-facing side of the site.
  *
@@ -38,8 +39,23 @@ function wp_prefix_placeholder_enqueue_script() {
 		);
 	}
 }
-// add_action( 'wp_enqueue_scripts', 'wp_prefix_placeholder_enqueue_styles');
-// add_action( 'wp_enqueue_scripts', 'wp_prefix_placeholder_enqueue_script');
+
+/**
+ * Register the dependencies for this plugin.
+ *
+ * @since    1.0.0
+ */
 function wp_prefix_placeholder_enqueue_dependencies() {
 	if (!ENQUEUE_PLACEHOLDER_CPT_DEPENDENCIES) return;
+}
+
+/**
+ * Check if script and style should be added globally
+ *
+ * @since    1.0.0
+ */
+if (ENQUEUE_PLACEHOLDER_CPT_GLOBAL) {
+	add_action( 'wp_enqueue_scripts', 'wp_prefix_placeholder_enqueue_styles');
+	add_action( 'wp_enqueue_scripts', 'wp_prefix_placeholder_enqueue_script');
+	add_action( 'wp_enqueue_scripts', 'wp_prefix_placeholder_enqueue_dependencies');	
 }

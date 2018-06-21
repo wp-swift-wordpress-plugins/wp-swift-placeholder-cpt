@@ -13,6 +13,7 @@ License: GPL2
 define("ENQUEUE_PLACEHOLDER_CPT_STYLE", false);
 define("ENQUEUE_PLACEHOLDER_CPT_SCRIPT", false);
 define("ENQUEUE_PLACEHOLDER_CPT_DEPENDENCIES", false);
+define("ENQUEUE_PLACEHOLDER_CPT_GLOBAL", false);
 # CPT
 require_once plugin_dir_path( __FILE__ ) . 'cpt/placeholder.php';
 # ACF Fields
