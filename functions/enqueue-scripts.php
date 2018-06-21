@@ -6,11 +6,11 @@
  */
 function wp_prefix_placeholder_enqueue_styles() {
 	if (!ENQUEUE_PLACEHOLDER_CPT_STYLE) return;
-	$file = 'assets/css/wp-taoglas-placeholder-public.css';
+	$file = 'assets/css/wp-text-domain-placeholder-public.css';
 	if (file_exists( plugin_dir_path( __DIR__ ) . $file )) {
 		$version = filemtime(plugin_dir_path( __DIR__ ) . $file);
 		wp_enqueue_style( 
-			"wp-taoglas-placeholder-public-css", 
+			"wp-text-domain-placeholder-public-css", 
 			plugin_dir_url( __DIR__ ) . $file, array(), 
 			$version, 
 			'all' 
@@ -26,11 +26,11 @@ function wp_prefix_placeholder_enqueue_script() {
 	wp_prefix_placeholder_enqueue_dependencies();
 	if (!ENQUEUE_PLACEHOLDER_CPT_SCRIPT) return;
 	
-	$file = 'assets/js/wp-taoglas-placeholder-public.js';
+	$file = 'assets/js/wp-text-domain-placeholder-public.js';
 	if (file_exists( plugin_dir_path( __DIR__ ) . $file )) {
 		$js_version = filemtime( plugin_dir_path( __DIR__ ) . $file );
 		wp_enqueue_script( 
-			"wp-taoglas-placeholder-public-js",
+			"wp-text-domain-placeholder-public-js",
 			plugin_dir_url( __DIR__ ) . $file,
 			array( "jquery" ),
 			$js_version,
