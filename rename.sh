@@ -2,9 +2,7 @@
 source ~/bash-scripts/_settings.sh
 clear
 folder=''
-default_text_domain='wp-taoglas'
-default_prefix='wp_taoglas'
-default_company="WP Taoglas"
+default_company="Taoglas"
 while true
 do
 	# printf 'Enter your post type slug: '
@@ -94,12 +92,22 @@ do
 	fi	
 
 	# Check for valid characters a-z, A-Z, 0-9, -
-	if [[ "$cpt" =~ [^a-z-] ]]; then
+	if [[ "$company" =~ [^a-zA-Z\ ] ]]; then
 		echo ${red}"Invalid characters${NC}"
 	else
 		# function_company=${text_domain//-/_}
 		# echo $function_text_domain
 		# exit
+		default_text_domain=$(tr '[:upper:]' '[:lower:]' <<< "$company")
+		default_text_domain=${default_text_domain// /-}
+		default_text_domain=wp-$default_text_domain
+		# 'wp-taoglas'
+		# default_prefix='wp_taoglas'
+		default_prefix=$(tr '[:upper:]' '[:lower:]' <<< "$company")
+		default_prefix=${default_text_domain// /_}	
+		default_prefix=wp_$default_prefix
+# default_text_domain='wp-taoglas'
+# default_prefix='wp_taoglas'			
 		break
 	fi	
 done
