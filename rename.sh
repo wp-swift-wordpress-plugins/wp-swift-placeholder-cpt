@@ -4,6 +4,7 @@ clear
 folder=''
 default_text_domain='wp-taoglas'
 default_prefix='wp_taoglas'
+default_company="WP Taoglas"
 while true
 do
 	# printf 'Enter your post type slug: '
@@ -81,7 +82,28 @@ do
 	fi	
 done
 #
+#
+while true
+do
+	printf "${PURPLE}Company${NC}"
+	read -p " ($default_company): " company
 
+	# Set default if not input
+	if [ "${company}" == "" ] ; then
+	  company=$default_company
+	fi	
+
+	# Check for valid characters a-z, A-Z, 0-9, -
+	if [[ "$cpt" =~ [^a-z-] ]]; then
+		echo ${red}"Invalid characters${NC}"
+	else
+		# function_company=${text_domain//-/_}
+		# echo $function_text_domain
+		# exit
+		break
+	fi	
+done
+#
 #
 while true
 do
@@ -164,6 +186,8 @@ printf "${PURPLE}singular_label${NC} "
 echo $singular_label
 printf "${PURPLE}folder${NC} " 
 echo $folder
+printf "${PURPLE}company${NC} " 
+echo $company
 printf "${PURPLE}text_domain${NC} " 
 echo $text_domain
 printf "${PURPLE}prefix${NC} " 
@@ -176,14 +200,20 @@ read verfiy
 if [[ $verfiy =~ ^[Yy]$ ]]
 then
 	echo "Renaming files..."
-
-mv wp-text-domain-placeholder.php ${prefix}-${cpt}.php
-mv assets/sass/wp-text-domain-placeholder-public.scss assets/sass/${prefix}-${cpt}-public.scss
-mv assets/js/wp-text-domain-placeholder-public.js assets/js/${prefix}-${cpt}-public.js
 	exit
-	# rm -rf .git
-	# git init
-	# 
+	mv wp-text-domain-placeholder.php ${text_domain}-${cpt}.php
+	mv assets/sass/wp-text-domain-placeholder-public.scss assets/sass/${text_domain}-${cpt}-public.scss
+	mv assets/js/wp-text-domain-placeholder-public.js assets/js/${text_domain}-${cpt}-public.js
+
+	sed -i "s/Placeholders/${plural_label}/g" README.md
+	sed -i "s/Placeholder/${singular_label}/g" README.md
+
+	sed -i "s/placeholders/${plural_cpt}/g" README.md
+	sed -i "s/placeholder/${cpt}/g" README.md	
+	exit
+	rm -rf .git
+	git init
+
 	sed -i "s/Placeholders/${temp_plural_label}/g" README.md
 	#
 	mv wp-text-domain-placeholder.php ${text_domain}-${cpt}.php	
