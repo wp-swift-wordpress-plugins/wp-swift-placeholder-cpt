@@ -107,7 +107,8 @@ do
 		default_prefix=${default_text_domain// /_}	
 		default_prefix=wp_$default_prefix
 # default_text_domain='wp-taoglas'
-# default_prefix='wp_taoglas'			
+# default_prefix='wp_taoglas'	
+		company="WP ${company}"		
 		break
 	fi	
 done
