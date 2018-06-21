@@ -200,7 +200,7 @@ read verfiy
 if [[ $verfiy =~ ^[Yy]$ ]]
 then
 	echo "Renaming files..."
-	exit
+
 	mv wp-text-domain-placeholder.php ${text_domain}-${cpt}.php
 	mv assets/sass/wp-text-domain-placeholder-public.scss assets/sass/${text_domain}-${cpt}-public.scss
 	mv assets/js/wp-text-domain-placeholder-public.js assets/js/${text_domain}-${cpt}-public.js
@@ -209,14 +209,28 @@ then
 	sed -i "s/Placeholder/${singular_label}/g" README.md
 
 	sed -i "s/placeholders/${plural_cpt}/g" README.md
-	sed -i "s/placeholder/${cpt}/g" README.md	
+	sed -i "s/placeholder/${cpt}/g" README.md
+
+	sed -i "s/WP Taoglas/${company}/g" README.md
+	sed -i "s/wp_taoglas/${prefix}/g" README.md	
+
+	sed -i "s/Placeholders/${temp_plural_label}/g" ${text_domain}-${cpt}.php
+	sed -i "s/placeholder/${cpt}/g" ${text_domain}-${cpt}.php
+	sed -i "s/PLACEHOLDER/${CPT}/g" ${text_domain}-${cpt}.php
+	sed -i "s/WP Taoglas/${company}/g" ${text_domain}-${cpt}.php
+
+	# cp ~/bash-scripts/wp-plugin-cpt/admin-menu.php admin-menu.php
+sed -i "s/placeholder/${cpt}/g" admin-menu.php
+# Rename class name
+sed -i "s/PlaceholderPluginTools/${singular_label}PluginTools/g" admin-menu.php
+# Rename instance name
+sed -i "s/plugin_tools/${cpt}_plugin_tools/g" admin-menu.php
+
 	exit
 	rm -rf .git
 	git init
-
-	sed -i "s/Placeholders/${temp_plural_label}/g" README.md
-	#
-	mv wp-text-domain-placeholder.php ${text_domain}-${cpt}.php	
+	git add .
+	git status
 else
     echo "Aborted"
     exit
