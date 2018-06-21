@@ -5,11 +5,10 @@ folder=''
 default_company="Taoglas"
 while true
 do
-	# printf 'Enter your post type slug: '
 	printf "Enter your post type ${PURPLE}slug${NC}: "
 	read cpt
 
-	# Check for valid characters a-z, A-Z, 0-9, -
+	# Check for valid characters a-z, underscore
 	if [[ "$cpt" =~ [^a-z_] ]]; then
 		echo ${red}"Invalid characters${NC}"
 	else
@@ -23,19 +22,15 @@ do
 	printf "${PURPLE}Slug plural${NC}"
 	read -p " ("$cpt"s): " plural_cpt
 
-	# printf 'Enter your slug plural: (${cpt}s)'
-	# read plural_cpt
-
 	# Set default if not input
 	if [ "${plural_cpt}" == "" ] ; then
 	  plural_cpt=${cpt}s
 	fi	
 
-	# Check for valid characters a-z, A-Z, 0-9, -
+	# Check for valid characters a-z, underscore
 	if [[ "$cpt" =~ [^a-z_] ]]; then
 		echo ${red}"Invalid characters${NC}"
 	else
-		
 		break
 	fi	
 done
@@ -210,9 +205,21 @@ if [[ $verfiy =~ ^[Yy]$ ]]
 then
 	echo "Renaming files..."
 
+# old=$PWD
+# echo $old
+# new="${old/wp-swift-placeholder-cpt/$folder}"
+# echo $new
+# mv $old $new
+# cd $new
+# pwd		
+	exit
 	mv wp-text-domain-placeholder.php ${text_domain}-${cpt}.php
-	mv assets/sass/wp-text-domain-placeholder-public.scss assets/sass/${text_domain}-${cpt}-public.scss
-	mv assets/js/wp-text-domain-placeholder-public.js assets/js/${text_domain}-${cpt}-public.js
+	sed -i "s/Placeholders/${temp_plural_label}/g" ${text_domain}-${cpt}.php
+	sed -i "s/placeholder/${cpt}/g" ${text_domain}-${cpt}.php
+	sed -i "s/PLACEHOLDER/${CPT}/g" ${text_domain}-${cpt}.php
+	sed -i "s/WP Taoglas/${company}/g" ${text_domain}-${cpt}.php	
+	# mv assets/sass/wp-text-domain-placeholder-public.scss assets/sass/${text_domain}-${cpt}-public.scss
+	# mv assets/js/wp-text-domain-placeholder-public.js assets/js/${text_domain}-${cpt}-public.js
 
 	sed -i "s/Placeholders/${plural_label}/g" README.md
 	sed -i "s/Placeholder/${singular_label}/g" README.md
@@ -223,10 +230,7 @@ then
 	sed -i "s/WP Taoglas/${company}/g" README.md
 	sed -i "s/wp_taoglas/${prefix}/g" README.md	
 
-	sed -i "s/Placeholders/${temp_plural_label}/g" ${text_domain}-${cpt}.php
-	sed -i "s/placeholder/${cpt}/g" ${text_domain}-${cpt}.php
-	sed -i "s/PLACEHOLDER/${CPT}/g" ${text_domain}-${cpt}.php
-	sed -i "s/WP Taoglas/${company}/g" ${text_domain}-${cpt}.php
+
 
 	# cp ~/bash-scripts/wp-plugin-cpt/admin-menu.php admin-menu.php
 	sed -i "s/placeholder/${cpt}/g" admin-menu.php
@@ -235,10 +239,22 @@ then
 	# Rename instance name
 	sed -i "s/plugin_tools/${cpt}_plugin_tools/g" admin-menu.php
 
+	cd acf
+		mv placeholder.php ${cpt}.php
+		cd ../	
 	cd assets
 		mkdir css
 		mkdir images
+		cd sass
+			mv wp-text-domain-placeholder-public.scss ${text_domain}-${cpt}-public.scss
+			cd ../
+		cd js
+			mv wp-text-domain-placeholder-public.js ${text_domain}-${cpt}-public.js
+			cd ../			
 		cd ../
+	cd cpt
+		mv placeholder.php ${cpt}.php
+		cd ../			
 	cd functions
 		sed -i "s/placeholder/${cpt}/g" enqueue-scripts.php
 		sed -i "s/PLACEHOLDER/${CPT}/g" enqueue-scripts.php
