@@ -19,18 +19,18 @@ In the root of the active theme (or child theme), duplicate `single.php` and ren
 
 ```php
 <?php
-//@start plugin "WP Taoglas: Events CPT"
+//@start plugin "WP Taoglas: Placeholders CPT"
 if (function_exists("wp_taoglas_placeholder_html")) echo wp_taoglas_placeholder_html();
-//@end plugin "WP Taoglas: Events CPT"
+//@end plugin "WP Taoglas: Placeholders CPT"
 ```
 
-#### Event Posts Pages
+#### Placeholder Posts Pages
 Go to the theme again and create a new template page page. I suggest that you duplicate `page.php` and rename it to `page-placeholders.php`. Add the following header to the template file.
 
 ```php
 <?php
 /*
-Template Name: Events
+Template Name: Placeholders
 */
 ```
 
@@ -38,9 +38,9 @@ Now add the following code to wherever you want to output placeholder content.
 
 ```php
 <?php
-//@start plugin "WP Taoglas: Events CPT"
+//@start plugin "WP Taoglas: Placeholders CPT"
 if (function_exists("wp_taoglas_placeholders_html")) echo wp_taoglas_placeholders_html();
-//@end plugin "WP Taoglas: Events CPT"
+//@end plugin "WP Taoglas: Placeholders CPT"
 ```
 ## Licence
 This project is licensed under the MIT license.
