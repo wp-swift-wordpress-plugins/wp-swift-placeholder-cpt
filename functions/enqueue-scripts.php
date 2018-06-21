@@ -4,7 +4,7 @@
  *
  * @since    1.0.0
  */
-function wp_taoglas_placeholder_enqueue_styles() {
+function wp_prefix_placeholder_enqueue_styles() {
 	if (!ENQUEUE_PLACEHOLDER_CPT_STYLE) return;
 	$file = 'assets/css/wp-taoglas-placeholder-public.css';
 	if (file_exists( plugin_dir_path( __DIR__ ) . $file )) {
@@ -22,8 +22,8 @@ function wp_taoglas_placeholder_enqueue_styles() {
  *
  * @since    1.0.0
  */
-function wp_taoglas_placeholder_enqueue_script() {
-	wp_taoglas_placeholder_enqueue_dependencies();
+function wp_prefix_placeholder_enqueue_script() {
+	wp_prefix_placeholder_enqueue_dependencies();
 	if (!ENQUEUE_PLACEHOLDER_CPT_SCRIPT) return;
 	
 	$file = 'assets/js/wp-taoglas-placeholder-public.js';
@@ -38,8 +38,8 @@ function wp_taoglas_placeholder_enqueue_script() {
 		);
 	}
 }
-// add_action( 'wp_enqueue_scripts', 'wp_taoglas_placeholder_enqueue_styles');
-// add_action( 'wp_enqueue_scripts', 'wp_taoglas_placeholder_enqueue_script');
-function wp_taoglas_placeholder_enqueue_dependencies() {
+// add_action( 'wp_enqueue_scripts', 'wp_prefix_placeholder_enqueue_styles');
+// add_action( 'wp_enqueue_scripts', 'wp_prefix_placeholder_enqueue_script');
+function wp_prefix_placeholder_enqueue_dependencies() {
 	if (!ENQUEUE_PLACEHOLDER_CPT_DEPENDENCIES) return;
 }
