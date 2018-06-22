@@ -22,5 +22,7 @@ require_once plugin_dir_path( __FILE__ ) . 'acf/placeholder.php';
 require_once plugin_dir_path( __FILE__ ) . 'admin-menu.php';
 # Functions
 require_once plugin_dir_path( __FILE__ ) . 'functions/enqueue-scripts.php';
-require_once plugin_dir_path( __FILE__ ) . 'functions/shortcodes.php';
 require_once plugin_dir_path( __FILE__ ) . 'functions/html.php';
+// require_once plugin_dir_path( __FILE__ ) . 'functions/shortcodes.php';
+// add_shortcode( 'placeholder', 'placeholder_func' );
+// add_shortcode( 'placeholders', 'placeholders_func' );
