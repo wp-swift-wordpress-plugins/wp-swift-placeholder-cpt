@@ -18,11 +18,11 @@ define("ENQUEUE_PLACEHOLDER_CPT_GLOBAL", false);
 require_once plugin_dir_path( __FILE__ ) . 'cpt/placeholder.php';
 # ACF Fields
 require_once plugin_dir_path( __FILE__ ) . 'acf/placeholder.php';
-# Admin menu
-require_once plugin_dir_path( __FILE__ ) . 'admin-menu.php';
 # Functions
 require_once plugin_dir_path( __FILE__ ) . 'functions/enqueue-scripts.php';
 require_once plugin_dir_path( __FILE__ ) . 'functions/html.php';
 // require_once plugin_dir_path( __FILE__ ) . 'functions/shortcodes.php';
 // add_shortcode( 'placeholder', 'placeholder_func' );
 // add_shortcode( 'placeholders', 'placeholders_func' );
+# Admin menu
+// require_once plugin_dir_path( __FILE__ ) . 'admin-menu.php';
